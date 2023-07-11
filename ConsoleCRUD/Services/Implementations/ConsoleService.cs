@@ -4,6 +4,7 @@ using ConsoleCRUD.Models;
 using ConsoleCRUD.Services.Interfaces;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace ConsoleCRUD.Services.Implementations
@@ -12,10 +13,12 @@ namespace ConsoleCRUD.Services.Implementations
 	{
 		protected readonly IConfiguration __config;
 		protected readonly IUsersService usersService;
+		protected readonly ILogger<ConsoleService> __logger;
 
-		public ConsoleService(IConfiguration config, IUsersService usersService)
+		public ConsoleService(IConfiguration config, IUsersService usersService, ILogger<ConsoleService> logger)
 		{
 			__config = config;
+			__logger = logger;
 			this.usersService = usersService;
 		}
 
@@ -43,8 +46,10 @@ namespace ConsoleCRUD.Services.Implementations
 						break;
 
 				}
-			} catch(SqlException e) {
-				Console.WriteLine(e.Data);
+			} catch (SqlException e) {
+				//ADD LOGGING
+				__logger.LogError("SQL error");
+				Console.ReadLine();
 			}
 			
 		}
