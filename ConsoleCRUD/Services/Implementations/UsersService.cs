@@ -16,11 +16,12 @@ namespace ConsoleCRUD.Services.Implementations
 		}
 
 		public IEnumerable<User> listUsers() {
+		
 			using (SqlConnection connection = _conn.getConnection()) {
 				List<User> users = (List<User>)connection.Query<User>("select * from [User]");
 				return users;
 			}
-			//return null;
+			
 		}
 
 		public User createUser(User newUser) {

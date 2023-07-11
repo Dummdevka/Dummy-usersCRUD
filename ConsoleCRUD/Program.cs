@@ -1,8 +1,4 @@
-﻿//Config ++ 
-//Logging
-//DB
-
-using ConsoleCRUD.DAL;
+﻿using ConsoleCRUD.DAL;
 using ConsoleCRUD.Services.Implementations;
 using ConsoleCRUD.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +18,6 @@ class Program
 			services.AddSingleton<IUsersService, UsersService>();
 		}).Build();
 
-		//host.Build();
 		ConsoleService svc = ActivatorUtilities.CreateInstance<ConsoleService>(host.Services);
 
 		svc.Run();
@@ -31,7 +26,6 @@ class Program
 
 	static void setConfig(IConfigurationBuilder builder) {
 		string rootPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-		//Console.WriteLine(rootPath);
 		builder
 			.SetBasePath(rootPath)
 			.AddJsonFile("appsettings.json")
